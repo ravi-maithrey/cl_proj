@@ -1,3 +1,6 @@
+"""we use this file to store all the functions that we will use in the main file"""
+
+
 # we use this function to find the majority element in a list
 def find_majority(k):
     """Return the element that occurs most frequently in the list k."""
