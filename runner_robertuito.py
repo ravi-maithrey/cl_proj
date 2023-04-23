@@ -12,7 +12,7 @@ import pandas as pd
 from sklearn.metrics import precision_recall_fscore_support, accuracy_score
 
 
-model_name = "robertuito-base-uncased"
+model_name = "pysentimiento/robertuito-base-uncased"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 
 num_labels = 2  # For binary classification
@@ -34,7 +34,11 @@ class CustomDataset(Dataset):
         text = self.texts[idx].lower()
         label = self.labels[idx]
         encoding = self.tokenizer(
-            text, return_tensors="pt", padding="max_length", truncation=True
+            text,
+            return_tensors="pt",
+            padding="max_length",
+            truncation=True,
+            max_length=512,
         )
         value = {key: torch.tensor(val[0]) for key, val in encoding.items()}
         value["label"] = torch.tensor(label)
