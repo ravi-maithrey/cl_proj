@@ -9,6 +9,8 @@ from torch.utils.data import Dataset
 import torch
 import pandas as pd
 
+from pysentimiento import preprocess_tweet
+
 from sklearn.metrics import precision_recall_fscore_support, accuracy_score
 
 
@@ -31,7 +33,7 @@ class CustomDataset(Dataset):
         return len(self.texts)
 
     def __getitem__(self, idx):
-        text = self.texts[idx].lower()
+        text = preprocess_tweet(self.texts[idx].lower())
         label = self.labels[idx]
         encoding = self.tokenizer(
             text,
