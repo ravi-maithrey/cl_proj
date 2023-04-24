@@ -61,6 +61,10 @@ train_text = train["tweet"]
 train_labels_pre = rf.majority_vote(train_labels1)
 train_labels = rf.label_convertor(train_labels_pre)
 
+english_train, eng_train_labels, espanol_train, esp_train_labels = rf.split_lang(
+    train_text, train_lang, train_labels
+)
+
 valid_labels1 = validation["labels_task1"]
 valid_lang = validation["lang"]
 valid_text = validation["tweet"]
@@ -68,8 +72,12 @@ valid_text = validation["tweet"]
 valid_labels_pre = rf.majority_vote(valid_labels1)
 valid_labels = rf.label_convertor(valid_labels_pre)
 
-train_dataset = CustomDataset(train_text, train_labels, tokenizer)
-valid_dataset = CustomDataset(valid_text, valid_labels, tokenizer)
+english_valid, eng_valid_labels, espanol_valid, esp_valid_labels = rf.split_lang(
+    train_text, train_lang, train_labels
+)
+
+train_dataset = CustomDataset(espanol_train, esp_train_labels, tokenizer)
+valid_dataset = CustomDataset(espanol_valid, esp_valid_labels, tokenizer)
 
 training_args = TrainingArguments(
     output_dir="./output",
