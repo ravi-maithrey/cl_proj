@@ -1,7 +1,7 @@
 import pandas as pd
 import json
 from transformers import pipeline, AutoModelForSequenceClassification, AutoTokenizer
-from pysentimiento import preprocess_tweet
+from pysentimiento.preprocessing import preprocess_tweet
 
 # Load the checkpoints and tokenizers for different languages
 checkpoint_paths = {

@@ -9,7 +9,7 @@ from torch.utils.data import Dataset
 import torch
 import pandas as pd
 
-from pysentimiento import preprocess_tweet
+from pysentimiento.preprocessing import preprocess_tweet
 
 from sklearn.metrics import precision_recall_fscore_support, accuracy_score
 
