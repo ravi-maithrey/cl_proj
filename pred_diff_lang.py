@@ -1,6 +1,7 @@
 import pandas as pd
 import json
 from transformers import pipeline, AutoModelForSequenceClassification, AutoTokenizer
+from pysentimiento import preprocess_tweet
 
 # Load the checkpoints and tokenizers for different languages
 checkpoint_paths = {
@@ -17,12 +18,27 @@ tokenizers = {
     lang: AutoTokenizer.from_pretrained(name) for lang, name in model_names.items()
 }
 
+
+# Define a custom preprocessing function for the Spanish tokenizer
+def preprocess_and_tokenize_es(texts):
+    preprocessed_texts = [preprocess_tweet(text) for text in texts]
+    return tokenizers["es"](preprocessed_texts)
+
+
 # Create classification pipelines for different languages
 classifiers = {
-    lang: pipeline(
-        "text-classification", model=models[lang], tokenizer=tokenizers[lang], device=0
-    )
-    for lang in ["es", "other"]
+    "es": pipeline(
+        "text-classification",
+        model=models["es"],
+        tokenizer=preprocess_and_tokenize_es,
+        device=0,
+    ),
+    "other": pipeline(
+        "text-classification",
+        model=models["other"],
+        tokenizer=tokenizers["other"],
+        device=0,
+    ),
 }
 
 # Read the test data into a pandas DataFrame
