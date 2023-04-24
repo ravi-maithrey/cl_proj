@@ -3,7 +3,7 @@ import json
 from transformers import pipeline, AutoModelForSequenceClassification, AutoTokenizer
 
 # Load the best checkpoint
-checkpoint_path = "./xlm/best_tfmr"
+checkpoint_path = "./output/xlm_checkpoint-2500"
 model = AutoModelForSequenceClassification.from_pretrained(checkpoint_path)
 
 # Load the tokenizer

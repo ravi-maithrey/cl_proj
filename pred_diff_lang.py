@@ -3,7 +3,10 @@ import json
 from transformers import pipeline, AutoModelForSequenceClassification, AutoTokenizer
 
 # Load the checkpoints and tokenizers for different languages
-checkpoint_paths = {"es": "./output/best_tfmr_es", "other": "./output/best_tfmr_other"}
+checkpoint_paths = {
+    "es": "./output/robertuito_checkpoint-2500",
+    "other": "./output/roberta_checkpoint-2500",
+}
 model_names = {"es": "robertuito-uncased-base", "other": "roberta-base"}
 
 models = {
