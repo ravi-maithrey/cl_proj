@@ -18,7 +18,7 @@ classifier = pipeline(
 )  # Set device to 0 if using GPU
 
 # Read the test data into a pandas DataFrame
-test_data = pd.read_json("test_data.json")
+test_data = pd.read_json("dataset/test/EXIST2023_test_clean.json")
 
 
 # Define a function to classify the tweets and map the predicted labels
