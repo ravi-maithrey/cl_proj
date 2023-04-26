@@ -5,10 +5,10 @@ from pysentimiento.preprocessing import preprocess_tweet
 
 # Load the checkpoints and tokenizers for different languages
 checkpoint_paths = {
-    "es": "./output/robertuito_checkpoint-2500",
+    "es": "./output/beto_checkpoint-2500",
     "other": "./output/roberta_checkpoint-2500",
 }
-model_names = {"es": "robertuito-uncased-base", "other": "roberta-base"}
+model_names = {"es": "dccuchile/bert-base-spanish-wwm-cased", "other": "roberta-base"}
 
 models = {
     lang: AutoModelForSequenceClassification.from_pretrained(path)
@@ -19,18 +19,12 @@ tokenizers = {
 }
 
 
-# Define a custom preprocessing function for the Spanish tokenizer
-def preprocess_and_tokenize_es(texts):
-    preprocessed_texts = [preprocess_tweet(text) for text in texts]
-    return tokenizers["es"](preprocessed_texts)
-
-
 # Create classification pipelines for different languages
 classifiers = {
     "es": pipeline(
         "text-classification",
         model=models["es"],
-        tokenizer=preprocess_and_tokenize_es,
+        tokenizer=tokenizers["es"],
         device=0,
     ),
     "other": pipeline(

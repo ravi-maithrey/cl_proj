@@ -14,7 +14,7 @@ from pysentimiento.preprocessing import preprocess_tweet
 from sklearn.metrics import precision_recall_fscore_support, accuracy_score
 
 
-model_name = "pysentimiento/robertuito-base-uncased"
+model_name = "dccuchile/bert-base-spanish-wwm-cased"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 
 num_labels = 2  # For binary classification
@@ -33,7 +33,7 @@ class CustomDataset(Dataset):
         return len(self.texts)
 
     def __getitem__(self, idx):
-        text = preprocess_tweet(self.texts[idx].lower())
+        text = self.texts[idx]
         label = self.labels[idx]
         encoding = self.tokenizer(
             text,
