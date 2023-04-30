@@ -36,7 +36,7 @@ classifiers = {
 }
 
 # Read the test data into a pandas DataFrame
-test_data = pd.read_json("dataset/test/EXIST2023_test_clean.json")
+test_data = pd.read_json("dataset/dev/EXIST2023_dev.json")
 
 
 # Define a function to classify the tweets and map the predicted labels
@@ -50,7 +50,7 @@ def classify_tweet(tweet, language):
 
 # Apply the function to the 'tweet' column based on the 'language' column and store the results in a new column
 test_data["hard_label"] = test_data.apply(
-    lambda row: classify_tweet(row["tweet"], row["language"]), axis=1
+    lambda row: classify_tweet(row["tweet"], row["lang"]), axis=1
 )
 
 # Prepare the data for JSON output
